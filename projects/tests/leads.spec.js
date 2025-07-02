@@ -2,9 +2,12 @@
 import { test, expect } from '@playwright/test';
 
 test('should sign in a lead in the waiting list', async ({ page }) => {
+  // Arrange
   await page.goto('http://localhost:3000');
+  await page.getByRole('button', {name: /Aperte o play/}).click();
 
-  await page.getByRole('button', {name: 'Aperte o play... se tiver coragem'}).click();
-
-  await page.waitForTimeout(10000);
+  // Act
+  await page.locator('#name').fill('Nome Completo')
+  await page.locator('#email').fill('email@exemplo.com')
+  await page.getByRole('button', {name: 'Quero entrar na fila!'}).click();
 });
