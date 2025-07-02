@@ -7,7 +7,7 @@ test('should sign in a lead in the waiting list', async ({ page }) => {
   await page.getByRole('button', {name: /Aperte o play/}).click();
 
   // Act
-  await page.locator('#name').fill('Nome Completo')
-  await page.locator('#email').fill('email@exemplo.com')
+  await page.locator('input[name=name]').fill('Nome Completo')
+  await page.locator('input[name=email]').fill('email@exemplo.com')
   await page.getByRole('button', {name: 'Quero entrar na fila!'}).click();
 });
