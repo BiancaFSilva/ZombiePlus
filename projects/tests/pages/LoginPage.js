@@ -18,11 +18,6 @@ export class LoginPage {
         await this.page.getByRole('button', {name: 'Entrar'}).click();
     }
 
-    async isLoggedIn() {
-        await this.page.waitForLoadState('networkidle');
-        await expect(this.page).toHaveURL(/.*admin/);
-    }
-
     async alertMessage(target) {
         const alert = this.page.locator('span[class$=alert]');
         await expect(alert).toHaveText(target);
