@@ -1,7 +1,6 @@
 const { expect } = require('@playwright/test');
 
-export class LandingPage {
-    
+export class LandingPage {    
     constructor (page) {
         this.page = page;
     }
@@ -22,13 +21,6 @@ export class LandingPage {
         await this.page.locator('input[name=email]').fill(leadEmail)
         await this.page.getByTestId('modal')
             .getByRole('button', {name: 'Quero entrar na fila!'}).click();
-    }
-
-    async toastMessage (message) {
-        const toast = this.page.locator('.toast');
-
-        await expect(toast).toHaveText(message);
-        await expect(toast).toBeHidden({timeout: 8000});
     }
 
     async alertMessage (target) {
