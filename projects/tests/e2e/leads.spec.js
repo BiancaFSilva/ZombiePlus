@@ -1,5 +1,6 @@
 // @ts-check
 const { test } = require('@playwright/test')
+const { faker } = require('@faker-js/faker');
 const { LandingPage } = require('../pages/LandingPage');
 const { Toast } = require('../pages/Components');
 
@@ -17,7 +18,9 @@ test('should sign in a lead in the waiting list', async ({ page }) => {
   await landingPage.openLeadModal();
 
   // Act
-  await landingPage.submitLeadForm('Nome Completo', 'email@exemplo.com');
+  const leadName = faker.person.fullName(); 
+  const leadEmail = faker.internet.email(); 
+  await landingPage.submitLeadForm(leadName, leadEmail);
 
   // Assert
   const message = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!';
