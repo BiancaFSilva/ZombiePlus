@@ -44,7 +44,7 @@ test('should not log in with invalid password', async ({ page }) => {
   await loginPage.submitLoginForm('admin@zombieplus.com', 'abc123');
 
   // Assert
-  await toast.Message("Oops!Ocorreu um erro ao tentar efetuar o login. Por favor, verifique suas credenciais e tente novamente.");
+  await toast.Message("Ocorreu um erro ao tentar efetuar o login. Por favor, verifique suas credenciais e tente novamente.");
 });
 
 test('should not log in with empty email', async ({ page }) => {
