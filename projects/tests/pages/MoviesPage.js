@@ -13,4 +13,19 @@ export class MoviesPage {
     async visit() {
         await this.page.goto('http://localhost:3000/admin/movies');
     }
+
+    async createMovie (title, overview, company, releaseYear) {
+        await this.page.locator('a[href$="/register"]').click();
+
+        await this.page.getByLabel('Titulo do filme').fill(title);
+        await this.page.getByLabel('Sinopse').fill(overview);
+
+        await this.page.locator('#select_company_id .react-select__indicator').click();
+        await this.page.locator('.react-select__option').filter({ hasText: company }).click();
+
+        await this.page.locator('#select_year .react-select__indicator').click();
+        await this.page.locator('.react-select__option').filter({ hasText: releaseYear }).click();
+
+        await this.page.getByRole('button', { name: 'Cadastrar' }).click();
+    }
 }

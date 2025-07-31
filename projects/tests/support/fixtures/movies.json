@@ -1,0 +1,18 @@
+{
+    "create": {
+        "title": "Edward Scissorhands",
+        "overview": "An artificial man who was incompletely constructed and has scissors for hands leads a solitary life until a suburban woman brings him into her home.",
+        "company": "Fox Entertainment",
+        "release_year": 1990,
+        "featured": false,
+        "cover": "/images/posters/edward_scissorhands.jpg"
+    },
+    "duplicated": {
+        "title": "The Nightmare Before Christmas",
+        "overview": "Bored with the same old scare-and-scream routine, Pumpkin King Jack Skellington longs to spread the joy of Christmas. But his merry mission puts Santa in jeopardy and creates a nightmare for good little boys and girls everywhere.",
+        "company": "Walt Disney Studios",
+        "release_year": 1993,
+        "featured": false,
+        "cover": "/images/posters/edward_scissorhands.jpg"
+    }
+}
