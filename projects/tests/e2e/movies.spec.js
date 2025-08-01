@@ -4,7 +4,8 @@ const { LoginPage } = require('../pages/LoginPage');
 const { MoviesPage } = require('../pages/MoviesPage');
 const { Toast } = require('../pages/Components');
 
-const data = require('./../support/fixtures/movies.json')
+const data = require('./../support/fixtures/movies.json');
+const { executeQuery } = require('../support/database.js');
 
 let loginPage;
 let moviesPage;
@@ -18,6 +19,7 @@ test.beforeEach(async ({ page }) => {
 
 test('should add a new movie', async ({ page }) => {
   const movie = data.create;
+  await executeQuery('DELETE FROM movies WHERE title = $1;', [movie.title]);
 
   // Arrange
   await loginPage.visit();
