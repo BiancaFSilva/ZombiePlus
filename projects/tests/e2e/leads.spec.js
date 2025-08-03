@@ -1,30 +1,19 @@
-// @ts-check
-const { test, expect } = require('@playwright/test')
+const { test, expect } = require('../support');
 const { faker } = require('@faker-js/faker');
-const { LandingPage } = require('../pages/LandingPage');
-const { Toast } = require('../pages/Components');
-
-let landingPage;
-let toast;
-
-test.beforeEach(async ({ page }) => {
-  landingPage = new LandingPage(page);
-  toast = new Toast(page);
-});
 
 test('should sign in a lead in the waiting list', async ({ page }) => {
   // Arrange
-  await landingPage.visit();
-  await landingPage.openLeadModal();
+  await page.landing.visit();
+  await page.landing.openLeadModal();
 
   // Act
   const leadName = faker.person.fullName();
   const leadEmail = faker.internet.email();
-  await landingPage.submitLeadForm(leadName, leadEmail);
+  await page.landing.submitLeadForm(leadName, leadEmail);
 
   // Assert
   const message = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!';
-  await toast.Message(message);
+  await page.toast.Message(message);
 });
 
 test('should not sign in a lead with duplicated email', async ({ page, request }) => {
@@ -41,61 +30,61 @@ test('should not sign in a lead with duplicated email', async ({ page, request }
   expect(newLead.ok()).toBeTruthy();
 
   // Arrange
-  await landingPage.visit();
-  await landingPage.openLeadModal();
+  await page.landing.visit();
+  await page.landing.openLeadModal();
 
   // Act
-  await landingPage.submitLeadForm(leadName, leadEmail);
+  await page.landing.submitLeadForm(leadName, leadEmail);
 
   // Assert
   const message = 'O endereço de e-mail fornecido já está registrado em nossa fila de espera.';
-  await toast.Message(message);
+  await page.toast.Message(message);
 });
 
 test('should not sign in a lead with invalid email', async ({ page }) => {
   // Arrange
-  await landingPage.visit();
-  await landingPage.openLeadModal();
+  await page.landing.visit();
+  await page.landing.openLeadModal();
 
   // Act
-  await landingPage.submitLeadForm('Nome Completo', 'email.exemplo.com');
+  await page.landing.submitLeadForm('Nome Completo', 'email.exemplo.com');
 
   // Assert
-  await landingPage.alertMessage("Email incorreto");
+  await page.landing.alertMessage("Email incorreto");
 });
 
 test('should not sign in a lead with empty name', async ({ page }) => {
   // Arrange
-  await landingPage.visit();
-  await landingPage.openLeadModal();
+  await page.landing.visit();
+  await page.landing.openLeadModal();
 
   // Act
-  await landingPage.submitLeadForm('', 'email@exemplo.com');
+  await page.landing.submitLeadForm('', 'email@exemplo.com');
 
   // Assert
-  await landingPage.alertMessage("Campo obrigatório");
+  await page.landing.alertMessage("Campo obrigatório");
 });
 
 test('should not sign in a lead with empty email', async ({ page }) => {
   // Arrange
-  await landingPage.visit();
-  await landingPage.openLeadModal();
+  await page.landing.visit();
+  await page.landing.openLeadModal();
 
   // Act
-  await landingPage.submitLeadForm('Nome Completo', '');
+  await page.landing.submitLeadForm('Nome Completo', '');
 
   // Assert
-  await landingPage.alertMessage("Campo obrigatório");
+  await page.landing.alertMessage("Campo obrigatório");
 });
 
 test('should not sign in a lead without filling name and email', async ({ page }) => {
   // Arrange
-  await landingPage.visit();
-  await landingPage.openLeadModal();
+  await page.landing.visit();
+  await page.landing.openLeadModal();
 
   // Act
-  await landingPage.submitLeadForm('', '');
+  await page.landing.submitLeadForm('', '');
 
   // Assert
-  await landingPage.alertMessage(['Campo obrigatório', 'Campo obrigatório']);
+  await page.landing.alertMessage(['Campo obrigatório', 'Campo obrigatório']);
 });
