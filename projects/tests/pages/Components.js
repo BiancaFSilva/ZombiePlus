@@ -12,3 +12,14 @@ export class Toast {
         await expect(toast).toBeHidden({timeout: 10000});
     }
 }
+
+export class Alert {
+    constructor(page) {
+        this.page = page;
+    }   
+    async Message (target) {
+        const alert = this.page.locator('.alert');  
+
+        await expect(alert).toHaveText(target, {timeout: 10000});
+    }
+}

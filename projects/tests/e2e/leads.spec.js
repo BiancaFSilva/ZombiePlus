@@ -50,7 +50,7 @@ test('should not sign in a lead with invalid email', async ({ page }) => {
   await page.landing.submitLeadForm('Nome Completo', 'email.exemplo.com');
 
   // Assert
-  await page.landing.alertMessage("Email incorreto");
+  await page.alert.Message('Email incorreto');
 });
 
 test('should not sign in a lead with empty name', async ({ page }) => {
@@ -62,7 +62,7 @@ test('should not sign in a lead with empty name', async ({ page }) => {
   await page.landing.submitLeadForm('', 'email@exemplo.com');
 
   // Assert
-  await page.landing.alertMessage("Campo obrigatório");
+  await page.alert.Message("Campo obrigatório");
 });
 
 test('should not sign in a lead with empty email', async ({ page }) => {
@@ -74,7 +74,7 @@ test('should not sign in a lead with empty email', async ({ page }) => {
   await page.landing.submitLeadForm('Nome Completo', '');
 
   // Assert
-  await page.landing.alertMessage("Campo obrigatório");
+  await page.alert.Message("Campo obrigatório");
 });
 
 test('should not sign in a lead without filling name and email', async ({ page }) => {
@@ -86,5 +86,5 @@ test('should not sign in a lead without filling name and email', async ({ page }
   await page.landing.submitLeadForm('', '');
 
   // Assert
-  await page.landing.alertMessage(['Campo obrigatório', 'Campo obrigatório']);
+  await page.alert.Message(['Campo obrigatório', 'Campo obrigatório']);
 });

@@ -22,8 +22,4 @@ export class LandingPage {
         await this.page.getByTestId('modal')
             .getByRole('button', {name: 'Quero entrar na fila!'}).click();
     }
-
-    async alertMessage (target) {
-        await expect(this.page.locator('.alert')).toHaveText(target);
-    }
 }
