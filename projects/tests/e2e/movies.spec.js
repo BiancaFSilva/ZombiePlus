@@ -8,7 +8,7 @@ test('should add a new movie', async ({ page }) => {
   await executeQuery('DELETE FROM movies WHERE title = $1;', [movie.title]);
 
   // Arrange
-  await page.login.doLogin('admin@zombieplus.com', 'pwd123');
+  await page.login.doLogin('admin@zombieplus.com', 'pwd123', 'Admin');
 
   // Act
   await page.movies.createMovie(movie.title, movie.overview, movie.company, movie.release_year);
@@ -21,7 +21,7 @@ test('should not add a duplicated movie', async ({ page }) => {
   const movie = data.duplicated;
 
   // Arrange
-  await page.login.doLogin('admin@zombieplus.com', 'pwd123');
+  await page.login.doLogin('admin@zombieplus.com', 'pwd123', 'Admin');
 
   // Act
   await page.movies.createMovie(movie.title, movie.overview, movie.company, movie.release_year);
@@ -32,7 +32,7 @@ test('should not add a duplicated movie', async ({ page }) => {
 
 test('should not add a new movie without filling the required fields', async ({ page }) => {
   // Arrange
-  await page.login.doLogin('admin@zombieplus.com', 'pwd123');
+  await page.login.doLogin('admin@zombieplus.com', 'pwd123', 'Admin');
 
   // Act
   await page.movies.openMovieRegisterForm();

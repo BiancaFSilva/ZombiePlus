@@ -8,7 +8,7 @@ test('should log in using an admin account', async ({ page }) => {
   await page.login.submitLoginForm('admin@zombieplus.com', 'pwd123');
 
   // Assert
-  await page.login.isLoggedIn();
+  await page.login.isLoggedIn('Admin');
 });
 
 test('should not log in with invalid email', async ({ page }) => {
