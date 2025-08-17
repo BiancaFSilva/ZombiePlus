@@ -33,3 +33,22 @@ test('should not add a duplicated movie', async ({ page }) => {
   // Assert
   await page.toast.Message('Este conteúdo já encontra-se cadastrado no catálogo');
 });
+
+test('should not add a new movie without filling the required fields', async ({ page }) => {
+  // Arrange
+  await page.login.visit();
+  await page.login.submitLoginForm('admin@zombieplus.com', 'pwd123');
+  await page.movies.isLoggedIn();
+
+  // Act
+  await page.movies.openRegisterForm();
+  await page.movies.submitRegisterForm();
+
+  // Assert
+  await page.alert.Message([
+    'Por favor, informe o título.',
+    'Por favor, informe a sinopse.',
+    'Por favor, informe a empresa distribuidora.',
+    'Por favor, informe o ano de lançamento.'
+  ]);
+});
