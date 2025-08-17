@@ -1,25 +1,20 @@
 const { expect } = require('@playwright/test');
 
-export class MoviesPage {
+export class Movies {
     constructor(page) {
         this.page = page;
     }
 
-    async isLoggedIn() {
-        await this.page.waitForLoadState('networkidle');
-        await expect(this.page).toHaveURL(/.*admin/);
-    }
-
-    async openRegisterForm() {
+    async openMovieRegisterForm() {
         await this.page.locator('a[href$="/register"]').click();
     }
 
-    async submitRegisterForm() {
+    async submitMovieForm() {
         await this.page.getByRole('button', { name: 'Cadastrar' }).click();
     }
 
     async createMovie (title, overview, company, releaseYear) {
-        await this.openRegisterForm();
+        await this.openMovieRegisterForm();
 
         await this.page.getByLabel('Titulo do filme').fill(title);
         await this.page.getByLabel('Sinopse').fill(overview);
@@ -30,6 +25,6 @@ export class MoviesPage {
         await this.page.locator('#select_year .react-select__indicator').click();
         await this.page.locator('.react-select__option').filter({ hasText: releaseYear }).click();
 
-        await this.submitRegisterForm();
+        await this.submitMovieForm();
     }
 }
